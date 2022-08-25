@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from employee.models import RequestTable
 from .windows_config import get_config
 from django.http import JsonResponse
 
@@ -19,13 +20,16 @@ def editUser(request):
     pass
 
 def getSupportTickets(request):
-    return render(request, "helpdesk/tickets.html", {})
+    logs = RequestTable.objects.all()
+    return render(request, "helpdesk/tickets.html", {'logs': logs})
 
 def requestApproval(request):
     pass
 
 def getTicketDetails(request, ticketId):
-    return render(request, "helpdesk/ticketDetails.html", {"ticketId":ticketId})
+    log = RequestTable.objects.get(id=ticketId)
+    print(log.description)
+    return render(request, "helpdesk/ticketDetails.html", {"log":log})
 
 def hardware_details(request):
     data = get_config()
