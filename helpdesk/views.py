@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from employee.models import RequestTable
+from .windows_config import get_config
+from django.http import JsonResponse
 
 def dashboard(request):
+   
     return render(request, "helpdesk/dashboard.html")
 
 def memberPage(request):
@@ -36,3 +39,9 @@ def getTicketDetails(request, ticketId):
     # log = RequestTable.objects.get(RequestTable.id==str(ticketId))
     # print(log)
     return render(request, "helpdesk/ticketDetails.html", {"log":log})
+
+def hardware_details(request):
+    data = get_config()
+    print(data)
+    return JsonResponse(data)
+     

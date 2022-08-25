@@ -5,14 +5,15 @@
 {% block sidebar %}
 <ul class="navbar-nav text-light m-2" id="accordionSidebar">
     <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
-    <li class="nav-item" hidden><a class="nav-link" href="members"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="members"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
     <li class="nav-item"><a class="nav-link" href="tickets"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
-    <li class="nav-item" hidden><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technical Logs</span></a></li>
 </ul>
 {% endblock %}
 
 {% block content %}
     <h4 class="text-dark mb-3">Dashboard</h4>
+    <div class="col"><button id= "get-config" class="btn btn-primary btn-sm float-end">Fetch My Configuration</button></div>
     <div class="row">
         <div class="col-md-6 col-xl-3 mb-4">
             <div class="card shadow border-start-primary py-2">
@@ -55,4 +56,32 @@
         </div>
     </div>
 {% endblock content %}
+
+
+
+
+
+{% block modal %}
+    
+
+{% include "helpdesk/modal/machineConfigModal.html" %}
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    $("#get-config").click(function () {
+        console.log("Inside function");
+        $.ajax({
+            url: 'ajax/validate_username/',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+          $('#currentConfig').modal('show');
+    });
+  </script>
+{% endblock %}
 

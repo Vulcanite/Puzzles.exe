@@ -28,5 +28,16 @@
     </div>
 </div>
 <script>
+     $("#get-config").click(function () {
+        console.log("Inside function");
+        $.ajax({
+            url: 'ajax/validate_username/',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+
+
+    });
     $("#name").text("Amish");
 </script>
