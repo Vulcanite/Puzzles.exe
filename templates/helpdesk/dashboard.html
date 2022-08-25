@@ -21,7 +21,7 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col me-2">
                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>No. of Open Requests</span></div>
-                            <div class="text-dark fw-bold h5 mb-0"><span>4</span></div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>{{open_requests}}</span></div>
                         </div>
                         <div class="col-auto"><i class="fas fa-exclamation fa-2x" style="color:red"></i></div>
                     </div>
@@ -34,7 +34,7 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col me-2">
                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>In-progress Requests</span></div>
-                            <div class="text-dark fw-bold h5 mb-0"><span>2</span></div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>{{approved_requests}}</span></div>
                         </div>
                         <div class="col-auto"><i class="fas fa-tasks fa-2x text-black"></i></div>
                     </div>
@@ -57,18 +57,9 @@
     </div>
 {% endblock content %}
 
-
-
-
-
 {% block modal %}
-    
-
-{% include "helpdesk/modal/machineConfigModal.html" %}
-
-
+    {% include "helpdesk/modal/machineConfigModal.html" %}
 {% endblock %}
-
 
 {% block scripts %}
 <script>

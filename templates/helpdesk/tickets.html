@@ -30,21 +30,14 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr>
-                    <td><a class="m-1" href="ticket/123456"> Need RAM Upgrade</a></td>
-                    <td>Amish</td>
-                    <td>UPGRADE</td>
-                    <td>July 25th 2022, 11:47:06 AM</td>
-                    <td><span class="m-1 badge bg-danger">CLOSED</span></td>
-                </tr> -->
                 {% for record in logs %}
 					<tr>
     			        <td id="uid" value="{{ record.id }}" >{{ record.id }}</td>
-    					<td><a name="title" value="{{ record.title }}" class="" href="/helpdesk/ticket/{{ record.id }}">{{ record.title }}</a></td>
-                        <td></td>
+    					<td><a name="title" value="{{ record.title }}" href="/helpdesk/ticket/{{ record.id }}">{{ record.title }}</a></td>
+                        <td>{{record.created_by.firstname}}</td>
 						<td>{{ record.request_tags }}</td>
     					<td value="{{ record.last_update }}" name="" class="">{{ record.last_update }}</td>
-                        <td><span class="m-1 badge bg-primary">{{record.status}}</span></td>
+                        <td><span id="status_color" class="m-1 badge {{record.color}}">{{record.status}}</span></td>
     				</tr>
 				{% endfor %}
             </tbody>
