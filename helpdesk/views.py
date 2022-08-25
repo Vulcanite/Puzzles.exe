@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from .windows_config import get_config
+from django.http import JsonResponse
 
 def dashboard(request):
+   
     return render(request, "helpdesk/dashboard.html")
 
 def memberPage(request):
@@ -23,3 +26,9 @@ def requestApproval(request):
 
 def getTicketDetails(request, ticketId):
     return render(request, "helpdesk/ticketDetails.html", {"ticketId":ticketId})
+
+def hardware_details(request):
+    data = get_config()
+    print(data)
+    return JsonResponse(data)
+     
