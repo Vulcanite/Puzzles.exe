@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block alert %}
+    {% include "employee/alerts.html" %}
+{% endblock %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light p-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="/emp/support-form"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a></li>
+    <li class="nav-item"><a class="nav-link active" href="/emp/logs"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<h3 class="text-dark mb-3">Logs</h3>
+<div class="alert alert-primary" role="alert" id="test" hidden>
+    A simple primary alert—check it out!
+</div>
+<div class="card">
+    <div class="table-responsive p-3 pb-1">
+        <table class="table table-borderless">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">Ticket ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in logs %}
+					<tr>
+    			        <td id="tid" value="{{ticket.id }}" >{{ ticket.id }}</td>
+    					<td><a name="title" value="{{ ticket.title }}" href="/helpdesk/ticket/{{ ticket.id }}">{{ ticket.title }}</a></td>
+                        <td><span id="status_color" class="m-1 badge {{ticket.color}}">{{ticket.status}}</span></td>
+						<td>{{ ticket.last_update }}</td>
+    				</tr>
+				{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

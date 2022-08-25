@@ -26,3 +26,14 @@ def deleteRequest(request):
 
 def editRequest(request):
     pass
+
+def logs(request):
+    tickets = RequestTable.objects.filter(created_by = request.user)
+    for log in tickets:
+        if log.status == "OPENED":
+            log.color = "bg-primary"
+        elif log.status == "APPROVED":
+            log.color = "bg-success"
+        else:
+            log.color = "bg-danger"
+    return render(request,"employee/logs.html", {"logs": tickets})
