@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block alert %}
+    {% include "employee/alerts.html" %}
+{% endblock %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light p-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link active"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h3 class="text-dark mb-3">Request Form</h3>
+<form class="col-md-4 col-md-offset-4" style="margin: 0 auto;" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="titleInput">Title</label>
+        <input type="text" class="form-control" id="titleInput" name="titleInput" placeholder="Enter Title">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="inputTag">Request Tags</label>
+        <select id="inputTag" name="inputTag" class="form-control">
+            <option selected>Select Tag</option>
+            <option>Self Repair</option>
+            <option>Request Technician</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="descInput">Description</label>
+        <textarea type="text" class="form-control" id="descInput" name="descInput" placeholder="Enter Description"></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+{% endblock %}
