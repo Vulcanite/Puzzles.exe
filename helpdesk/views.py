@@ -3,8 +3,9 @@ from employee.models import RequestTable
 from .windows_config import get_config
 from django.http import JsonResponse
 
+status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
+
 def dashboard(request):
-   
     return render(request, "helpdesk/dashboard.html")
 
 def memberPage(request):
@@ -21,6 +22,13 @@ def editUser(request):
 
 def getSupportTickets(request):
     logs = RequestTable.objects.all()
+    for log in logs:
+        if log.status == "OPENED":
+            log.color = "bg-primary"
+        elif log.status == "APPROVED":
+            log.color = "bg-success"
+        else:
+            log.color = "bg-danger"
     return render(request, "helpdesk/tickets.html", {'logs': logs})
 
 def requestApproval(request):
@@ -28,7 +36,6 @@ def requestApproval(request):
 
 def getTicketDetails(request, ticketId):
     log = RequestTable.objects.get(id=ticketId)
-    print(log.description)
     return render(request, "helpdesk/ticketDetails.html", {"log":log})
 
 def hardware_details(request):
