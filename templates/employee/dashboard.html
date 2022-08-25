@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block alert %}
+    {% include "employee/alerts.html" %}
+{% endblock %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light p-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h3 class="text-dark mb-3">Dashboard</h3>
+<div class="row">
+    <div class="col-md-8 col-xl-8 mb-4">
+        <div class="card shadow border-start-primary">
+            <div class="card-header text-dark"><strong>My Current Configuration</strong></div>
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col me-2">
+                        <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>No. of Open Requests</span></div>
+                        <div class="text-dark fw-bold h5 mb-0"><span>4</span></div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-exclamation fa-2x" style="color:red"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+{% endblock %}

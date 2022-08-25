@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Helpdesk - Ticket{% endblock title %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light m-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link" href="{% url 'helpdesk/dashboard' %}"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'helpdesk/members' %}"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
+    <li class="nav-item"><a class="nav-link active" href="{% url 'helpdesk/tickets' %}"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col"><h5 class="mt-2"><b>&nbsp Request Details</b></h5></div>
+    <div class="col"><button class="btn btn-primary btn-sm float-end" onclick="javascript: $('#currentConfig').modal('show');">Fetch Configuration</button></div>
+</div>
+<div class="card mt-2">
+    <h6 class="card-header"><strong>Ticket ID -#{{ticketId}}</strong></h6>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3"><label><strong>Title:&nbsp</strong></label> Need RAM Upgrade</div>
+                <div class="mb-3"><label><strong>Request Tags:&nbsp</strong></label></div>
+            </div>
+            <div class="col">
+                <div class="mb-3"><label><strong>Created By:&nbsp</strong></label>Amish</div>
+                <div class="mb-3"><label><strong>Updated On:&nbsp</strong></label>July 24th 2022, 11:47:05 AM</div>
+            </div>
+            <div class="col">
+                <div class="mb-3 "><label><strong>STATUS:&nbsp</strong></label><span class="badge bg-primary">OPEN</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-4">
+                    <label><strong>Description:</strong></label>
+                    <textarea class="form-control" id="ticketDescription" rows="3" readonly></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-success btn-sm float-end">Approve Request</button>
+                <button class="btn btn-danger btn-sm"  onclick="javascript:$('#ticketDeleteModal').modal('show');">Reject Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block modal %}
+    {% include "helpdesk/modal/ticketDeleteModal.html" %}
+    {% include "helpdesk/modal/machineConfigModal.html" %}
+{% endblock %}

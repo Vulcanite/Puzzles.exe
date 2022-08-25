@@ -1,0 +1,32 @@
+<div class="modal fade" id="addMemberModal" tabindex="-1" aria-labelledby="addMemberModal" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 0.5rem;">
+            <div class="modal-header py-3">
+                <p class="text-primary m-0 fw-bold">Add Member</p>
+            </div>
+            <div class="modal-body py-3">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-2"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
+                            <div class="mb-2"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                            <div class="mb-2"><label class="form-label" for="name"><strong>Name</strong></label><input class="form-control" type="text" id="name" name="name"></div>
+                            <div class="mb-2">
+                                <label class="form-label" for="role"><strong>Member Role</strong></label>
+                                <select class="form-select" aria-label="Role Select">
+                                    <option selected>Choose Role</option>
+                                    <option value="1">Employee</option>
+                                    <option value="2">Technician</option>
+                                    <option value="3">Inventory Manager</option>
+                                    <option value="4">Procurement Manager</option>
+                                    <option value="5">Helpdesk Manager</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1"><button class="btn btn-primary btn-sm float-end" type="submit">Save Settings</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

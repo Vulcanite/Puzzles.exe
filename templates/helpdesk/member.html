@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Helpdesk - Members{% endblock title %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light m-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="tickets"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container p-2">
+    <button type="button" class="btn btn-primary btn-sm float-end" onclick="javascript:$('#addMemberModal').modal('show') ">Add Member</button>
+</div>
+<h5 class="mt-2"><b>&nbsp Members</b></h5>
+<div class="card">
+    <div class="table-responsive p-3 pb-1">
+        <table class="table table-borderless">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">Sr.no</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Amish</td>
+                    <td>amishtp147@outlook.com</td>
+                    <td>HELPDESK</td>
+                    <td>
+                        <a class="m-1" href="javascript:$('#addMemberModal').modal('show');"><i class="fas fa-cog"></i></a>
+                        <a class="m-1" href="javascript:$('#deleteMemberModal').modal('show');"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+
+{% block modal%}
+
+    {% include "helpdesk/modal/addMemberModal.html" %}
+    {% include "helpdesk/modal/deleteMemberModal.html" %}
+
+{% endblock modal %}

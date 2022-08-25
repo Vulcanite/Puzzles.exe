@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Helpdesk - Support Tickets{% endblock title %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light m-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="members"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert" id="test" hidden>
+    A simple primary alert—check it out!
+</div>
+<h5 class="mt-2"><b>&nbsp Support Requests</b></h5>
+<div class="card">
+    <div class="table-responsive p-3 pb-1">
+        <table class="table table-borderless">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">Title</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Request TYPE</th>
+                    <th scope="col">Created on</th>
+                    <th scope="col">STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="m-1" href="ticket/123456"> Need RAM Upgrade</a></td>
+                    <td>Amish</td>
+                    <td>UPGRADE</td>
+                    <td>July 25th 2022, 11:47:06 AM</td>
+                    <td><span class="m-1 badge bg-danger">CLOSED</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    setTimeout('$("#test").hide()',5000);
+</script>
+{% endblock %}

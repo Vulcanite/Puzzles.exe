@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Helpdesk - Dashboard{% endblock title %}
+
+{% block sidebar %}
+<ul class="navbar-nav text-light m-2" id="accordionSidebar">
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="members"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="tickets"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+    <h4 class="text-dark mb-3">Dashboard</h4>
+    <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>No. of Open Requests</span></div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>4</span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-exclamation fa-2x" style="color:red"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>In-progress Requests</span></div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>2</span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-tasks fa-2x text-black"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Machines Deployed</span></div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>32</span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-desktop fa-2x" style="color: darkblue"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
