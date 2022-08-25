@@ -21,6 +21,7 @@
         <table class="table table-borderless">
             <thead>
                 <tr class="table-secondary">
+                    <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Created By</th>
                     <th scope="col">Request TYPE</th>
@@ -29,13 +30,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td><a class="m-1" href="ticket/123456"> Need RAM Upgrade</a></td>
                     <td>Amish</td>
                     <td>UPGRADE</td>
                     <td>July 25th 2022, 11:47:06 AM</td>
                     <td><span class="m-1 badge bg-danger">CLOSED</span></td>
-                </tr>
+                </tr> -->
+                {% for record in logs %}
+					<tr>
+    			        <td id="uid" value="{{ record.id }}" >{{ record.id }}</td>
+    					<td><a name="title" value="{{ record.title }}" class="" href="ticket/{{ record.id }}">{{ record.title }}</a></td>
+                        <td></td>
+						<td>{{ record.request_tags }}</td>
+    					<td value="{{ record.last_update }}" name="" class="">{{ record.last_update }}</td>
+                        <td><span class="m-1 badge bg-primary">OPEN</span></td>
+    				</tr>
+				{% endfor %}
             </tbody>
         </table>
     </div>
