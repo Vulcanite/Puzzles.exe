@@ -6,7 +6,9 @@ from django.http import JsonResponse
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
 def dashboard(request):
-    return render(request, "helpdesk/dashboard.html")
+    open_requests = RequestTable.objects.filter(status='OPENED').count()
+    approved_requests = RequestTable.objects.filter(status='APPROVED').count()
+    return render(request, "helpdesk/dashboard.html", {"open_requests":open_requests, "approved_requests":approved_requests})
 
 def memberPage(request):
     return render(request, "helpdesk/member.html")
