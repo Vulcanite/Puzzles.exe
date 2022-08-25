@@ -4,16 +4,16 @@
 
 {% block sidebar %}
 <ul class="navbar-nav text-light m-2" id="accordionSidebar">
-    <li class="nav-item"><a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="/helpdesk/dashboard"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
     <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Members</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="tickets"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="/helpdesk/tickets"><i class="fas fa-exclamation-triangle fa-3x"></i><span>Support Tickets</span></a></li>
     <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-wrench fa-3x"></i><span>Technicians DB</span></a></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="container p-2">
-    <button type="button" class="btn btn-primary btn-sm float-end" onclick="javascript:$('#addMemberModal').modal('show') ">Add Member</button>
+    <a href="/auth/register"><button type="button" class="btn btn-primary btn-sm float-end" >Add Member</button></a>
 </div>
 <h5 class="mt-2"><b>&nbsp Members</b></h5>
 <div class="card">
