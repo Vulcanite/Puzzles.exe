@@ -21,8 +21,5 @@ def getSupportTickets(request):
 def requestApproval(request):
     pass
 
-def allotTechnician(request):
-    pass
-
 def getTicketDetails(request, ticketId):
     return render(request, "helpdesk/ticketDetails.html", {"ticketId":ticketId})
