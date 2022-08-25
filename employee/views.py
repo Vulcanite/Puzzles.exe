@@ -13,6 +13,7 @@ def addRequest(request):
         save_request = RequestTable(title = request.POST.get('titleInput'),
                                 request_tags = request.POST.get('inputTag'),
                                 description = request.POST.get('descInput'))
+        print(save_request)
         save_request.save()
     return render(request, "employee/support-form.html")
 

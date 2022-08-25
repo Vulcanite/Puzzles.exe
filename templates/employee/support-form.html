@@ -18,21 +18,21 @@
     {% csrf_token %}
     <div class="form-group">
         <label for="titleInput">Title</label>
-        <input type="text" class="form-control" id="titleInput" name="titleInput" placeholder="Enter Title">
+        <input type="text" class="form-control" id="titleInput" name="titleInput" placeholder="Enter Title" required>
     </div>
     <br>
     <div class="form-group">
         <label for="inputTag">Request Tags</label>
-        <select id="inputTag" name="inputTag" class="form-control">
-            <option selected>Select Tag</option>
-            <option>Self Repair</option>
-            <option>Request Technician</option>
+        <select id="inputTag" name="inputTag" required class="form-control">
+            <option value="">Select Tag</option>
+            <option value="Self Repair">Self Repair</option>
+            <option value="Request Technician">Request Technician</option>
         </select>
     </div>
     <br>
     <div class="form-group">
         <label for="descInput">Description</label>
-        <textarea type="text" class="form-control" id="descInput" name="descInput" placeholder="Enter Description"></textarea>
+        <textarea type="text" class="form-control" id="descInput" name="descInput" placeholder="Enter Description" required></textarea>
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>

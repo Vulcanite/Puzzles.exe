@@ -17,16 +17,16 @@
     <div class="col"><button class="btn btn-primary btn-sm float-end" onclick="javascript: $('#currentConfig').modal('show');">Fetch Configuration</button></div>
 </div>
 <div class="card mt-2">
-    <h6 class="card-header"><strong>Ticket ID -#{{ticketId}}</strong></h6>
+    <h6 class="card-header"><strong>Ticket ID -#{{log.id}}</strong></h6>
     <div class="card-body">
         <div class="row">
             <div class="col">
-                <div class="mb-3"><label><strong>Title:&nbsp</strong></label> Need RAM Upgrade</div>
-                <div class="mb-3"><label><strong>Request Tags:&nbsp</strong></label></div>
+                <div class="mb-3"><label><strong>Title:&nbsp</strong></label> {{log.title}} </div>
+                <div class="mb-3"><label><strong>Request Tags:&nbsp</strong></label> {{log.request_tags}} </div>
             </div>
             <div class="col">
                 <div class="mb-3"><label><strong>Created By:&nbsp</strong></label>Amish</div>
-                <div class="mb-3"><label><strong>Updated On:&nbsp</strong></label>July 24th 2022, 11:47:05 AM</div>
+                <div class="mb-3"><label><strong>Updated On:&nbsp</strong></label>{{log.last_update}}</div>
             </div>
             <div class="col">
                 <div class="mb-3 "><label><strong>STATUS:&nbsp</strong></label><span class="badge bg-primary">OPEN</span></div>
@@ -36,7 +36,7 @@
             <div class="col">
                 <div class="mb-4">
                     <label><strong>Description:</strong></label>
-                    <textarea class="form-control" id="ticketDescription" rows="3" readonly></textarea>
+                    <textarea class="form-control" id="ticketDescription" rows="3" readonly>{{log.description}}</textarea>
                 </div>
             </div>
         </div>
