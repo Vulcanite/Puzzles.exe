@@ -5,6 +5,6 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="helpdesk/dashboard"),
     path("members/", views.memberPage, name="helpdesk/members"),
     path("tickets/", views.getSupportTickets, name="helpdesk/tickets"),
-    path("ticket/<int:ticketId>/", views.getTicketDetails, name="ticket"),
+    path("ticket/<int:ticketId>/", views.getTicketDetails, name="helpdesk/ticket"),
     path("ajax/validate_username/",views.hardware_details)
 ]

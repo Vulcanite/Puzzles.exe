@@ -40,11 +40,11 @@
                 {% for record in logs %}
 					<tr>
     			        <td id="uid" value="{{ record.id }}" >{{ record.id }}</td>
-    					<td><a name="title" value="{{ record.title }}" class="" href="ticket/{{ record.id }}">{{ record.title }}</a></td>
+    					<td><a name="title" value="{{ record.title }}" class="" href="/helpdesk/ticket/{{ record.id }}">{{ record.title }}</a></td>
                         <td></td>
 						<td>{{ record.request_tags }}</td>
     					<td value="{{ record.last_update }}" name="" class="">{{ record.last_update }}</td>
-                        <td><span class="m-1 badge bg-primary">OPEN</span></td>
+                        <td><span class="m-1 badge bg-primary">{{record.status}}</span></td>
     				</tr>
 				{% endfor %}
             </tbody>

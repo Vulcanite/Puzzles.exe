@@ -27,17 +27,8 @@ def requestApproval(request):
     pass
 
 def getTicketDetails(request, ticketId):
-    logs = RequestTable.objects.all()
-    for i in logs:
-        if i.id==ticketId:
-            log = i
-        # print(type(i.id))
-        # print(type(ticketId))
-        # log = RequestTable.objects.get(i.id)
+    log = RequestTable.objects.get(id=ticketId)
     print(log.description)
-    print(str(ticketId))
-    # log = RequestTable.objects.get(RequestTable.id==str(ticketId))
-    # print(log)
     return render(request, "helpdesk/ticketDetails.html", {"log":log})
 
 def hardware_details(request):
