@@ -6,17 +6,9 @@
 
 {% block sidebar %}
 <ul class="navbar-nav text-light p-2" id="accordionSidebar">
-  <li class="nav-item">
-    <a class="nav-link active" href="#"
-      ><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a
-    >
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/emp/support-form"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a>
-  </li>
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="/emp/support-form"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="/emp/logs"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
 </ul>
 {% endblock %}
 
@@ -87,5 +79,5 @@
 {% endblock %} 
 
 {% block scripts %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 {% endblock %}

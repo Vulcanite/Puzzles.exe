@@ -38,6 +38,12 @@ def requestApproval(request):
 
 def getTicketDetails(request, ticketId):
     log = RequestTable.objects.get(id=ticketId)
+    if log.status == "OPENED":
+        log.color = "bg-primary"
+    elif log.status == "APPROVED":
+        log.color = "bg-success"
+    else:
+        log.color = "bg-danger"
     return render(request, "helpdesk/ticketDetails.html", {"log":log})
 
 def hardware_details(request):

@@ -25,11 +25,11 @@
                 <div class="mb-3"><label><strong>Request Tags:&nbsp</strong></label> {{log.request_tags}} </div>
             </div>
             <div class="col">
-                <div class="mb-3"><label><strong>Created By:&nbsp</strong></label>Amish</div>
+                <div class="mb-3"><label><strong>Created By:&nbsp</strong></label>{{log.created_by}}</div>
                 <div class="mb-3"><label><strong>Updated On:&nbsp</strong></label>{{log.last_update}}</div>
             </div>
             <div class="col">
-                <div class="mb-3 "><label><strong>STATUS:&nbsp</strong></label><span class="badge bg-primary">{{log.status}}</span></div>
+                <div class="mb-3 "><label><strong>STATUS:&nbsp</strong></label><span class="badge {{log.color}}">{{log.status}}</span></div>
             </div>
         </div>
         <div class="row">
