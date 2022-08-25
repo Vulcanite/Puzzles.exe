@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from employee.models import RequestTable
 from .windows_config import get_config
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
@@ -44,4 +44,13 @@ def hardware_details(request):
     data = get_config()
     print(data)
     return JsonResponse(data)
-     
+    
+def save_hardware_to_db(request):
+    try:
+        save_request = hardware_details(emp_fname= request.POST.get('titleInput'),
+                                    emp_pc_config = request.POST.get('inputTag'),
+                                    emp_ip_address = request.POST.get('descInput'))
+        save_request.save()
+        return HttpResponse("Config Successfully Saved!!!")
+    except:
+        return HttpResponse("Config Saved Failed!!!")

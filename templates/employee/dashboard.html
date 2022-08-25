@@ -1,102 +1,91 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
-{% block alert %}
-    {% include "employee/alerts.html" %}
-{% endblock %}
+{% block alert %} 
+  {% include "employee/alerts.html" %}
+{% endblock %} 
 
 {% block sidebar %}
 <ul class="navbar-nav text-light p-2" id="accordionSidebar">
-    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="/emp/support-form"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#"
+      ><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/emp/support-form"><i class="fas fa-user-cog fa-3x"></i><span>Create Support Request</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a>
+  </li>
 </ul>
 {% endblock %}
 
 <style>
-    .logged-in {
+  .logged-in {
     color: green;
   }
-  
+
   .logged-out {
     color: red;
   }
-  </style>
+</style>
 
-{% block content %}
+{% block content %} 
 {% load static %}
 <h3 class="text-dark mb-3">Dashboard</h3>
 <div class="row">
-    <div class="col-md-12 col-xl-12 mb-8">
-        <div class="card shadow border-start-primary">
-            <div class="card-body">
-               
-                <div class="row d-flex justify-content-center text-center">
-                            <div class="col-md-6">
-                                <br>
-                                
-                                <img src="{% static 'images/dashboard_img.jpg' %}" style="width:50%">
-                               <p>AMISH</p>
-
-                               <span class="logged-in" style="color: green;">● ACTIVE</span><br> 
-                                <span class="logged-out" style="color: red; visibility: hidden;" >● OFFLINE</span>
-                               
-                                    <br>
-                                <button type="button" class="btn btn-primary">Refresh</button>
-                            
-                                <br>
-                            </div>
-                                                            
-                            <div class="col-md-6">
-                                
-                                <div class="text-dark h5 mb-0">
-                                <table class="table table-borderless">
-                                    <br><br>
-                                    <tr>
-                                        <tbody>
-                                            <tr>
-                                              <th class="bold" scope="row">Device Type</th>
-                                              <td>Laptop</td>
-                                            </tr>
-                                                                                   
-                                            <tr>
-                                                <th scope="row" class="text-center">CPU :</th>
-                                                <td class="text-center">Xad</td>
-                                              </tr>
-                                            
-                                              <tr>
-                                                <th scope="row" class="text-center">RAM :</th>
-                                                <td class="text-center">Xad</td>
-                                              </tr>
-
-                                              <tr>
-                                                <th scope="row" class="text-center">HDD :</th>
-                                                <td class="text-center">Xad</td>
-                                              </tr>
-
-                                              <tr>
-                                                <th scope="row" class="text-center">Motherboard :</th>
-                                                <td class="text-center">Xad</td>
-                                              </tr>
-
-                                          </tbody></tr>
-                                        </table> 
-                                                       
-                                </div>
-                            
-                            <button type="button" class="btn btn-primary">More details</button>
-                            </div>
-                        </div>
+  <div class="col-md-12 col-xl-12 mb-8">
+    <div class="card shadow border-start-primary">
+      <div class="card-body">
+        <div class="row d-flex justify-content-center text-center">
+          <div class="col-md-6">
+            <img
+              src="{% static 'images/dashboard_img.jpg' %}"
+              style="width: 50%"
+            />
+            <h3>192.168.0.1</h3>
+            <span class="logged-in" style="color: green">● ACTIVE</span><br />
+            <span class="logged-out" style="color: red; visibility: hidden">● OFFLINE</span>
+            <br>
+            <button type="button" class="btn btn-primary"> Refresh </button>
+          </div>
+          <div class="col-md-6">
+            <div class="text-dark h5 mb-0">
+              <table class="table table-borderless">
+                <br/><br/>
+                <tbody>
+                  <tr>
+                    <th class="bold" scope="row">Device Type</th>
+                    <td>Laptop</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-center">CPU :</th>
+                    <td class="text-center">Xad</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-center">RAM :</th>
+                    <td class="text-center">Xad</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-center">HDD :</th>
+                    <td class="text-center">Xad</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-center">Motherboard :</th>
+                    <td class="text-center">Xad</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="btn btn-primary">More details</button>
+          </div>
+        </div>
+      </div>
     </div>
-                           
-    </div>
-                            
-    </div>
-    </div>
-                        
-                    <!--<div class="col-auto"><i class="fas fa-exclamation fa-2x" style="color:red"></i></div>-->
-                
-{% endblock %}
+  </div>
+</div>
+{% endblock %} 
 
 {% block scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 {% endblock %}
