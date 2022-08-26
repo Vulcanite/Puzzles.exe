@@ -4,6 +4,7 @@ from .windows_config import get_config
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from deepdiff import DeepDiff
+from employee.models import RequestTable
 
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
@@ -45,15 +46,19 @@ def requestApproval(request):
 
 
 @csrf_exempt
-def checkstatus(request):
+def checkstatus(request,tag):
     if request.method == 'POST':
-        print('worked',request.data)
+        print('worked',tag)
+        ticket_id = request.session["ticketId"]
+        obj = RequestTable.objects.get(id=ticket_id)
+        obj.status = tag
+        obj.save()
         return HttpResponse("hiii")
 
 def getTicketDetails(request, ticketId):
     if request.method == 'POST':
         print('worked',request.data)
-
+    request.session["ticketId"] = ticketId
     log = RequestTable.objects.get(id=ticketId)
     if log.status == "OPENED":
         log.color = "bg-primary"

@@ -59,7 +59,7 @@
     event.preventDefault();
     $.ajax({
       type: "POST",
-      url: "/helpdesk/isapprove/",
+      url: "/helpdesk/isapprove/APPROVED",
       success: function () {
         $('#approve').css("display", "none");
         $('#reject').css("display", "none");
@@ -74,7 +74,7 @@
     event.preventDefault();
     $.ajax({
       type: "POST",
-      url: "/helpdesk/isapprove/",
+      url: "/helpdesk/isapprove/REJECTED",
       success: function () {
         $('#approve').css("display", "none");
         $('#reject').css("display", "none");
