@@ -4,13 +4,20 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from deepdiff import DeepDiff
 from employee.models import RequestTable
+from helpdesk.models import hardware_details
 
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
 def dashboard(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    object = hardware_details.objects.get(emp_ip_address = ip)
     open_requests = RequestTable.objects.filter(status='OPENED').count()
     approved_requests = RequestTable.objects.filter(status='APPROVED').count()
-    return render(request, "helpdesk/dashboard.html", {"open_requests":open_requests, "approved_requests":approved_requests})
+    return render(request, "helpdesk/dashboard.html", {"open_requests":open_requests, "approved_requests":approved_requests, "details":object.emp_pc_config})
 
 def memberPage(request):
     return render(request, "helpdesk/member.html")
