@@ -2,7 +2,7 @@ from django.shortcuts import render
 from employee.models import RequestTable
 from .windows_config import get_config
 from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
 def dashboard(request):
@@ -21,6 +21,10 @@ def addUser(request):
 
 def editUser(request):
     pass
+
+def getTechnicalLogs(request):
+    log = dict()
+    return render(request, "helpdesk/technical-logs.html")
 
 def getSupportTickets(request):
     logs = RequestTable.objects.all()
@@ -59,16 +63,21 @@ def getTicketDetails(request, ticketId):
 
 def hardware_details(request):
     data = get_config()
-    print(data)
     return JsonResponse(data)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a632712e662665ff76aef46e9008f8e0a1e2cddf
 def save_hardware_to_db(request):
     try:
         save_request = hardware_details(emp_fname= request.POST.get('titleInput'),
                                     emp_pc_config = request.POST.get('inputTag'),
                                     emp_ip_address = request.POST.get('descInput'))
         save_request.save()
-        return HttpResponse("Config Successfully Saved!!!")
+        return HttpResponse("Config Successfully Saved!")
     except:
-        return HttpResponse("Config Saved Failed!!!")
+        return HttpResponse("Config Save Failed!")
+
+def diff(old_config, new_config):
+    return DeepDiff(old_config, new_config, ignore_order=True)

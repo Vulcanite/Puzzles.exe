@@ -7,5 +7,5 @@ urlpatterns = [
     path("tickets/", views.getSupportTickets, name="helpdesk/tickets"),
     path("ticket/<int:ticketId>/", views.getTicketDetails, name="helpdesk/ticket"),
     path("ajax/validate_username/",views.hardware_details),
-    path("isapprove/",views.checkstatus,name="isapprove")
+    path('tech-logs/', views.getTechnicalLogs, name="technical-logs")
 ]

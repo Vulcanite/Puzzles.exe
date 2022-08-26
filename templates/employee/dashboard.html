@@ -1,9 +1,5 @@
 {% extends "base.html" %} 
 
-{% block alert %} 
-  {% include "employee/alerts.html" %}
-{% endblock %} 
-
 {% block sidebar %}
 <ul class="navbar-nav text-light p-2" id="accordionSidebar">
     <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-tachometer-alt fa-3x"></i><span>Dashboard</span></a></li>
@@ -11,7 +7,6 @@
     <li class="nav-item"><a class="nav-link" href="/emp/logs"><i class="fas fa-user-cog fa-3x"></i><span>Logs</span></a></li>
 </ul>
 {% endblock %}
-
 <style>
   .logged-in {
     color: green;
@@ -69,7 +64,7 @@
                 </tbody>
               </table>
             </div>
-            <button type="button" class="btn btn-primary">More details</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:$('#currentConfig').modal('show');">More details</button>
           </div>
         </div>
       </div>
@@ -77,6 +72,10 @@
   </div>
 </div>
 {% endblock %} 
+
+{% block modal %}
+  {% include 'employee/modal/machineConfigModal.html' %}
+{% endblock %}
 
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
