@@ -65,10 +65,6 @@ def hardware_details(request):
     data = get_config()
     return JsonResponse(data)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a632712e662665ff76aef46e9008f8e0a1e2cddf
 def save_hardware_to_db(request):
     try:
         save_request = hardware_details(emp_fname= request.POST.get('titleInput'),
