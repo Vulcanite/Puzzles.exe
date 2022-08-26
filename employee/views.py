@@ -2,9 +2,11 @@ from webbrowser import get
 from django.shortcuts import render
 
 from employee.models import RequestTable
+from helpdesk.models import hardware_details
 
 def dashboard(request):
-    return render(request, "employee/dashboard.html")
+    object = hardware_details.objects.first()
+    return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
 
 def supportRequest(request):
     return render(request, "employee/support-form.html")

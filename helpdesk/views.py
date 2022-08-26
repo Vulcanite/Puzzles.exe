@@ -2,6 +2,8 @@ from django.shortcuts import render
 from employee.models import RequestTable
 from .windows_config import get_config
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from deepdiff import DeepDiff
 
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 

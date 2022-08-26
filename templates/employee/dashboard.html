@@ -30,7 +30,7 @@
               src="{% static 'images/dashboard_img.jpg' %}"
               style="width: 50%"
             />
-            <h3>192.168.0.1</h3>
+            <h3>{{details.PrivateIPAddress}}</h3>
             <span class="logged-in" style="color: green">● ACTIVE</span><br />
             <span class="logged-out" style="color: red; visibility: hidden">● OFFLINE</span>
             <br>
@@ -43,23 +43,23 @@
                 <tbody>
                   <tr>
                     <th class="bold" scope="row">Device Type</th>
-                    <td>Laptop</td>
+                    <td>{{details.DeviceType}}</td>
                   </tr>
                   <tr>
                     <th scope="row" class="text-center">CPU :</th>
-                    <td class="text-center">Xad</td>
+                    <td class="text-center">{{details.CPU.Name}}</td>
                   </tr>
                   <tr>
                     <th scope="row" class="text-center">RAM :</th>
-                    <td class="text-center">Xad</td>
+                    <td class="text-center">{{details.RAM.0.Manufacturer}}</td>
                   </tr>
                   <tr>
                     <th scope="row" class="text-center">HDD :</th>
-                    <td class="text-center">Xad</td>
+                    <td class="text-center">{{details.HDD.Model}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" class="text-center">Motherboard :</th>
-                    <td class="text-center">Xad</td>
+                    <th scope="row" class="text-center">GPU :</th>
+                    <td class="text-center">{{details.GPU.0.Vendor}}</td>
                   </tr>
                 </tbody>
               </table>
