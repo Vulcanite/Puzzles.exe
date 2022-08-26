@@ -91,7 +91,7 @@
                         {% endfor %}
                         <tr>
                             <th scope="row" style="text-align: left;">HDD model</th>
-                            <td style="text-align: left;">{{details.HDD.Model}}</td>
+                            <td style="text-align: left;">{{details.HDD.0.Model}}</td>
                         </tr>
                         <tr>
                             <th scope="row" style="text-align: left;">HDD momery</th>
@@ -103,21 +103,33 @@
                         </tr>
                         {% for i in details.GPU %}
                         <tr>
-                            <th scope="row" style="text-align: left;">GPU</th>
+                            <th scope="row" style="text-align: left;">GPU Model</th>
                             <td style="text-align: left;">{{i.Model}}</td>
                         </tr>
                         <tr>
-                            <th scope="row" style="text-align: left;">GPU</th>
+                            <th scope="row" style="text-align: left;">GPU Vendor</th>
                             <td style="text-align: left;">{{i.Vendor}}</td>
                         </tr>
                         {% endfor %}
+                        <tr>
+                            <th scope="row" style="text-align: left;">Keyboard</th>
+                            <td style="text-align: left;">{{details.Keyboard.PNPDeviceID}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="text-align: left;">Camera Name</th>
+                            <td style="text-align: left;">{{details.Camera.Name}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="text-align: left;">Camera Id</th>
+                            <td style="text-align: left;">{{details.Camera.Id}}</td>
+                        </tr>
                         
                         </tbody>
                     </table>
                 </div>
                 </div>
                 <div class="col text-center">
-                    <button type="button" class="btn btn-primary" onclick="javascript:$('#currentConfig').modal('show');">More details</button>
+                    <!-- <button type="button" class="btn btn-primary" onclick="javascript:$('#currentConfig').modal('show');">More details</button> -->
                 </div>
             </div>
             </div>
