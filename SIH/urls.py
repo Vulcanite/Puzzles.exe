@@ -21,4 +21,5 @@ urlpatterns = [
     path('helpdesk/', include('helpdesk.urls')),
     path('emp/', include('employee.urls')),
     path('auth/', include('UserAuth.urls')),
+    path("api/", include("helpdesk.api.urls")),
 ]

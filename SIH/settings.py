@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'employee',
     'helpdesk',
     'UserAuth',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

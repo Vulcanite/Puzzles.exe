@@ -42,12 +42,50 @@
         </div>
         <div class="row">
             <div class="col">
-                <button class="btn btn-success btn-sm float-end">Approve Request</button>
-                <button class="btn btn-danger btn-sm"  onclick="javascript:$('#ticketDeleteModal').modal('show');">Reject Request</button>
+                {% if log.status == 'OPENED' %}
+                <button class="btn btn-success btn-sm float-end" id="approve">Approve Request</button>
+                <button class="btn btn-danger btn-sm" id="reject"  onclick="javascript:$('#ticketDeleteModal').modal('show');">Reject Request</button>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+  $("#approve").click(function (event) {
+    console.log('hiiiiiii')
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/helpdesk/isapprove/",
+      success: function () {
+        $('#approve').css("display", "none");
+        $('#reject').css("display", "none");
+        console.log('hiiiiiiiiii')
+      }
+    });
+    return true; //<---- move it here
+  });
+
+  $("#reject").click(function (event) {
+    console.log('hiiiiiii')
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/helpdesk/isapprove/",
+      success: function () {
+        $('#approve').css("display", "none");
+        $('#reject').css("display", "none");
+        console.log('hiiiiiiiiii')
+      }
+    });
+    return true; //<---- move it here
+  });
+  });
+</script>
+
 {% endblock %}
 
 {% block modal %}

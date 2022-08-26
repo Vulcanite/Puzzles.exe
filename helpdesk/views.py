@@ -2,7 +2,7 @@ from django.shortcuts import render
 from employee.models import RequestTable
 from .windows_config import get_config
 from django.http import JsonResponse, HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
 def dashboard(request):
@@ -36,7 +36,18 @@ def getSupportTickets(request):
 def requestApproval(request):
     pass
 
+
+
+@csrf_exempt
+def checkstatus(request):
+    if request.method == 'POST':
+        print('worked',request.data)
+        return HttpResponse("hiii")
+
 def getTicketDetails(request, ticketId):
+    if request.method == 'POST':
+        print('worked',request.data)
+
     log = RequestTable.objects.get(id=ticketId)
     if log.status == "OPENED":
         log.color = "bg-primary"
@@ -50,7 +61,8 @@ def hardware_details(request):
     data = get_config()
     print(data)
     return JsonResponse(data)
-    
+
+
 def save_hardware_to_db(request):
     try:
         save_request = hardware_details(emp_fname= request.POST.get('titleInput'),
