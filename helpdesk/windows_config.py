@@ -4,8 +4,128 @@ import subprocess, json
 import re
 import subprocess
 import json
-from .constants import ram_type, manufacturer_names, form_factor
 import socket
+import requests
+
+manufacturer_names={"ACI":"Asus (ASUSTeK Computer Inc.)",
+"ACR":"Acer America Corp.",
+"ACT":"Targa",
+"ADI":"ADI Corporation",
+"AMW":"AMW",
+"AOC":"AOC International (USA) Ltd.",
+"API":"Acer America Corp.",
+"APP":"Apple Computer, Inc.",
+"ART":"ArtMedia",
+"AST":"AST Research",
+"AUO":"AU Optronics",
+"BMM":"BMM",
+"BNQ":"BenQ Corporation",
+"BOE":"BOE Display Technology",
+"CPL":"Compal Electronics, Inc. / ALFA",
+"CPQ":"COMPAQ Computer Corp.",
+"CTX":"CTX - Chuntex Electronic Co.",
+"DEC":"Digital Equipment Corporation",
+"DEL":"Dell Computer Corp.",
+"DPC":"Delta Electronics, Inc.",
+"DWE":"Daewoo Telecom Ltd",
+"ECS":"ELITEGROUP Computer Systems",
+"EIZ":"EIZO",
+"EPI":"Envision Peripherals, Inc.",
+"FCM":"Funai Electric Company of Taiwan",
+"FUS":"Fujitsu Siemens",
+"GSM":"LG Electronics Inc. (GoldStar Technology, Inc.)",
+"GWY":"Gateway 2000",
+"HEI":"Hyundai Electronics Industries Co., Ltd.",
+"HIQ":"Hyundai ImageQuest",
+"HIT":"Hitachi",
+"HSD":"Hannspree Inc",
+"HSL":"Hansol Electronics",
+"HTC":"Hitachi Ltd. / Nissei Sangyo America Ltd.",
+"HWP":"Hewlett Packard (HP)",
+"HPN":"Hewlett Packard (HP)",
+"IBM":"IBM PC Company",
+"ICL":"Fujitsu ICL",
+"IFS":"InFocus",
+"IQT":"Hyundai",
+"IVM":"Idek Iiyama North America, Inc.",
+"KDS":"KDS USA",
+"KFC":"KFC Computek",
+"LEN":"Lenovo",
+"LGD":"LG Display",
+"LKM":"ADLAS / AZALEA",
+"LNK":"LINK Technologies, Inc.",
+"LPL":"LG Philips",
+"LTN":"Lite-On",
+"MAG":"MAG InnoVision",
+"MAX":"Maxdata Computer GmbH",
+"MEI":"Panasonic Comm. & Systems Co.",
+"MEL":"Mitsubishi Electronics",
+"MIR":"miro Computer Products AG",
+"MTC":"MITAC",
+"NAN":"NANAO",
+"NEC":"NEC Technologies, Inc.",
+"NOK":"Nokia",
+"NVD":"Nvidia",
+"OQI":"OPTIQUEST",
+"PBN":"Packard Bell",
+"PCK":"Daewoo",
+"PDC":"Polaroid",
+"PGS":"Princeton Graphic Systems",
+"PHL":"Philips Consumer Electronics Co.",
+"PRT":"Princeton",
+"REL":"Relisys",
+"SAM":"Samsung",
+"SEC":"Seiko Epson Corporation",
+"SMC":"Samtron",
+"SMI":"Smile",
+"SNI":"Siemens Nixdorf",
+"SNY":"Sony Corporation",
+"SPT":"Sceptre",
+"SRC":"Shamrock Technology",
+"STN":"Samtron",
+"STP":"Sceptre",
+"TAT":"Tatung Co. of America, Inc.",
+"TRL":"Royal Information Company",
+"TSB":"Toshiba, Inc.",
+"UNM":"Unisys Corporation",
+"VSC":"ViewSonic Corporation",
+"WTC":"Wen Technology",
+"ZCM":"Zenith Data Systems"}
+
+ram_type={
+	"20": "DDR",
+	"21":"DDR2",
+	"22":"DDR2 FB-DIMM",
+	"24":"DDR3",
+	"26":"DDR4"
+}
+
+form_factor={
+"0":"Unknown",
+"1":"Other",
+"2":"SIP",
+"3":"DIP",
+"4":"ZIP",
+"5":"SOJ",
+"6":"Proprietary",
+"7":"SIMM",
+"8":"DIMM",
+"9":"TSOP",
+"10":"PGA",
+"11":"RIMM",
+"12":"SODIMM",
+"13":"SRIMM",
+"14":"SMD",
+"15":"SSMP",
+"16":"QFP",
+"17":"TQFP",
+"18":"SOIC",
+"19":"LCC",
+"20":"PLCC",
+"21":"DDR2",
+"22":"FPBGA",
+"23":"LGA"
+}
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -23,11 +143,11 @@ def get_config():
     config = dict()
     machine_type = subprocess.getoutput("PowerShell -Command \"& { Get-CimInstance Win32_SystemEnclosure | Select-Object -ExpandProperty ChassisTypes}\"")
     if(int(machine_type) in [3,4,5,6,7,15,16]):
-        config["Device-Type"]="Desktop"
+        config["DeviceType"]="Desktop"
     else:
-        config["Device-Type"]="Laptop"
+        config["DeviceType"]="Laptop"
 
-    config["Private IP Address:"] = get_ip()
+    config["IPAddress:"] = get_ip()
 
     l=[]
     
@@ -108,24 +228,39 @@ def get_config():
 
     #MOUSE INFORMATION
     try:
-        out4 = subprocess.getoutput("PowerShell -Command \"& {'win32_pointingdevice'| % {gwmi $_ | ? description -match 'hid'} | Select description, PNPDeviceID|ConvertTo-Json}\"")
+        out4 = subprocess.getoutput("PowerShell -Command \"& {Get-WmiObject win32_PointingDevice|Select PNPDeviceID|ConvertTo-Json}\"")
         j4=json.loads(out4)
-        index1=re.search(r'VID_',j4["PNPDeviceID"]).end()
-        index2=re.search(r'PID_',j4["PNPDeviceID"]).end()
-        config["Mouse"]={"Vendor ID":j4["PNPDeviceID"][index1:index1+4],"Product ID":j4["PNPDeviceID"][index2:index2+4]}
+        if(type(j4) is list):
+           
+            l=[]
+            for i in j4:
+                l.append({"PNPDeviceID":i["PNPDeviceID"]})
+        
+            config["Mouse"]=l
+        else:
+            config["Mouse"]={"PNPDeviceID":j4["PNPDeviceID"]}
+
  
     except:
         config["Mouse"]={"Vendor ID":None,"Product ID":None}
 
     #KEYBOARD INFORMATION
     try:
-        out5 = subprocess.getoutput("PowerShell -Command \"& {'win32_keyboard'| % {gwmi $_ | ? description -match 'hid'} | Select description, PNPDeviceID|ConvertTo-Json}\"")
+        out5 = subprocess.getoutput("PowerShell -Command \"& { Get-CimInstance -ClassName Win32_Keyboard | select PNPDeviceId|ConvertTo-Json}\"")
         j5=json.loads(out5)
-        index1=re.search(r'VID_',j5["PNPDeviceID"]).end()
-        index2=re.search(r'PID_',j5["PNPDeviceID"]).end()
-        config["Keyboard"]={"Vendor ID":j5["PNPDeviceID"][index1:index1+4],"Product ID":j5["PNPDeviceID"][index2:index2+4]}
+        if(type(j5) is list):
+            print("in here keyboard")
+            l=[]
+            for i in j5:
+                l.append({"PNPDeviceID":i["PNPDeviceId"]})
+            config["Keyboard"]=l
+        else:
+            config["Keyboard"]={"PNPDeviceID":j5["PNPDeviceId"]}
+
+       
 
     except:
+
         config["Keyboard"]={"Vendor ID":None,"Product ID":None}
 
     l=[]
@@ -136,20 +271,62 @@ def get_config():
         out7 = subprocess.getoutput("PowerShell -Command \"& {Get-WmiObject win32_videocontroller | select CurrentHorizontalResolution, CurrentVerticalResolution,MaxRefreshRate|ConvertTo-JSON}\"")
         j7=json.loads(out7)
 
-        print(j7)
+        new=[]
 
-        if len(j6)==1:
-            index=re.search(r'\\[A-Z]{3}[A-Za-z0-9]{4}\\',j6["InstanceName"]).start()
-            l.append({"Model":j6["InstanceName"][index+1:index+7],"Manufacturer":manufacturer_names[j6["InstanceName"][index+1:index+7][0:3]]})
+        if type(j6)!=list and type(j7)!=list:
+            l.append({"Model":j6["InstanceName"],"Resolution": str(j7["CurrentVerticalResolution"])+" x "+str(j7["CurrentHorizontalResolution"]),"MaxRefreshRate":str(j7["MaxRefreshRate"])})
+        elif type(j6)!=list and type(j7)==list:
+            for i in j7:
+                if i["CurrentHorizontalResolution"]==None or i["CurrentVerticalResolution"]==None or i["MaxRefreshRate"]==None:
+                    continue
+                else:
+                    new.append(i)
+
+            l.append({"Model":j6["InstanceName"],"Resolution": str(new[0]["CurrentVerticalResolution"])+" x "+str(new[0]["CurrentHorizontalResolution"]),"MaxRefreshRate":str(new[0]["MaxRefreshRate"])})
 
         else:
-            for i in range(len(j6)):
-                index=re.search(r'\\[A-Z]{3}[A-Za-z0-9]{4}\\',j6[i]["InstanceName"]).start()
+ 
+            for i in j7:
+                if i["CurrentHorizontalResolution"]==None or i["CurrentVerticalResolution"]==None or i["MaxRefreshRate"]==None:
+                    continue
+            else:
+                new.append(i)
 
-                l.append({"Model":j6[i]["InstanceName"][index+1:index+7],"Manufacturer":manufacturer_names[j6[i]["InstanceName"][index+1:index+7][0:3]]})
+            for i in range(len(j6)):
+                l.append({"Model":j6[i]["InstanceName"],"Resolution": str(new[0]["CurrentVerticalResolution"])+" x "+str(new[0]["CurrentHorizontalResolution"]),"MaxRefreshRate":str(new[0]["MaxRefreshRate"])})
         config["Monitor"]=l
 
     except:
         config["Monitor"]=[{"Model":None,"Manufacturer":None}]
+    
+   
+
+   #CAMERA INFORMATION
+
+    try:
+        out8 = subprocess.getoutput("PowerShell -Command \"& { Get-WmiObject Win32_PnPEntity | where {$_.caption -match 'camera'}|Select caption, DeviceID|ConvertTo-Json}\"")
+        
+        print("before j8")
+        j8=json.loads(out8)
+
+        if(type(j8) is list):
+            l=[]
+            for i in j8:
+                l.append({"Name":i["caption"],"Id":i["DeviceID"]})
+            config["Camera"]=l
+        else:
+            config["Camera"]={"Name":j8["caption"],"Id":j8["DeviceID"]}
+    except:
+            config["Camera"]=[{"Name":None,"Id":None}]
+
     return config
-		
+
+
+
+a=get_config()
+print(a)
+
+
+API = "http://192.168.168.206:8000/api/getData/"
+r = requests.post(url = API, headers = {"content-type":"application/json"}, data=json.dumps(a))
+print(r.text)
