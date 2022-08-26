@@ -323,10 +323,8 @@ def get_config():
 
 
 
-a=get_config()
-print(a)
-
+data=get_config()
 
 API = "http://192.168.168.206:8000/api/getData/"
-r = requests.post(url = API, headers = {"content-type":"application/json"}, data=json.dumps(a))
+r = requests.post(url = API, headers = {"content-type":"application/json"}, data=json.dumps(data))
 print(r.text)

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from employee.models import RequestTable
-from .windows_config import get_config
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from deepdiff import DeepDiff
@@ -43,8 +42,6 @@ def getSupportTickets(request):
 def requestApproval(request):
     pass
 
-
-
 @csrf_exempt
 def checkstatus(request,tag):
     if request.method == 'POST':
@@ -53,7 +50,7 @@ def checkstatus(request,tag):
         obj = RequestTable.objects.get(id=ticket_id)
         obj.status = tag
         obj.save()
-        return HttpResponse("hiii")
+        return HttpResponse("Success!")
 
 def getTicketDetails(request, ticketId):
     if request.method == 'POST':
@@ -67,20 +64,6 @@ def getTicketDetails(request, ticketId):
     else:
         log.color = "bg-danger"
     return render(request, "helpdesk/ticketDetails.html", {"log":log})
-
-def hardware_details(request):
-    data = get_config()
-    return JsonResponse(data)
-
-def save_hardware_to_db(request):
-    try:
-        save_request = hardware_details(emp_fname= request.POST.get('titleInput'),
-                                    emp_pc_config = request.POST.get('inputTag'),
-                                    emp_ip_address = request.POST.get('descInput'))
-        save_request.save()
-        return HttpResponse("Config Successfully Saved!")
-    except:
-        return HttpResponse("Config Save Failed!")
 
 def diff(old_config, new_config):
     return DeepDiff(old_config, new_config, ignore_order=True)
