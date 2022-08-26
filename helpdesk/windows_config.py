@@ -1,3 +1,4 @@
+from urllib.error import URLError
 import psutil
 import math
 import subprocess, json
@@ -6,6 +7,7 @@ import subprocess
 import json
 import socket
 import requests
+import json
 
 manufacturer_names={"ACI":"Asus (ASUSTeK Computer Inc.)",
 "ACR":"Acer America Corp.",
@@ -147,7 +149,7 @@ def get_config():
     else:
         config["DeviceType"]="Laptop"
 
-    config["IPAddress:"] = get_ip()
+    config["IPAddress"] = get_ip()
 
     l=[]
     
@@ -190,9 +192,15 @@ def get_config():
         out2 = subprocess.getoutput("PowerShell -Command \"& {Get-PhysicalDisk| Select Size, SerialNumber, MediaType,Model| ConvertTo-Json}\"")
         j2=json.loads(out2)
 
-        for i in j2:
-            if i["MediaType"]=="HDD":
-                l.append({"Model":i["Model"],"Serial Number":i["SerialNumber"],"Memory":str(math.ceil((i["Size"]/ (1024.0**3))/1000))+" TB"})
+        print(j2)
+
+        if type(j2)!=list:
+            if j2["MediaType"]=="HDD":
+                l.append({"Model":j2["Model"],"Serial Number":j2["SerialNumber"],"Memory":str(math.ceil((j2["Size"]/ (1024.0**3))/1000))+" TB"})
+        else:
+            for i in j2:
+                if i["MediaType"]=="HDD":
+                    l.append({"Model":i["Model"],"Serial Number":i["SerialNumber"],"Memory":str(math.ceil((i["Size"]/ (1024.0**3))/1000))+" TB"})
         config["HDD"]=l
     except:
         config["HDD"]={"Model":None,"Serial Number":None,"Memory":None}
@@ -323,8 +331,8 @@ def get_config():
 
 
 
-data=get_config()
-
+d=get_config()
+# print(d)
 API = "http://192.168.168.206:8000/api/getData/"
-r = requests.post(url = API, headers = {"content-type":"application/json"}, data=json.dumps(data))
+r = requests.post(url = API, data=json.dumps(d), headers={"content-type":"application/json"})
 print(r.text)
