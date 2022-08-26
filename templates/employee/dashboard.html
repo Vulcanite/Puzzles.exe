@@ -27,7 +27,7 @@
         <div class="row d-flex justify-content-center text-center">
           <div class="col-md-6">
             <img
-              src="{% static 'images/dashboard_img.jpg' %}"
+              src="{% static 'images/pc-image.png' %}"
               style="width: 50%"
             />
             <h3>{{details.PrivateIPAddress}}</h3>
@@ -42,24 +42,24 @@
                 <br/><br/>
                 <tbody>
                   <tr>
-                    <th class="bold" scope="row">Device Type</th>
-                    <td>{{details.DeviceType}}</td>
+                    <th class="bold" scope="row" style="text-align: left;">Device Type</th>
+                    <td style="text-align: left;">{{details.DeviceType}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" class="text-center">CPU :</th>
-                    <td class="text-center">{{details.CPU.Name}}</td>
+                    <th scope="row" style="text-align: left;">CPU</th>
+                    <td style="text-align: left;">{{details.CPU.Name}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" class="text-center">RAM :</th>
-                    <td class="text-center">{{details.RAM.0.Manufacturer}}</td>
+                    <th scope="row" style="text-align: left;">RAM</th>
+                    <td style="text-align: left;">{{details.RAM.0.Manufacturer}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" class="text-center">HDD :</th>
-                    <td class="text-center">{{details.HDD.Model}}</td>
+                    <th scope="row" style="text-align: left;">HDD</th>
+                    <td style="text-align: left;">{{details.HDD.Model}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" class="text-center">GPU :</th>
-                    <td class="text-center">{{details.GPU.0.Vendor}}</td>
+                    <th scope="row" style="text-align: left;">GPU</th>
+                    <td style="text-align: left;">{{details.GPU.0.Vendor}}</td>
                   </tr>
                 </tbody>
               </table>
