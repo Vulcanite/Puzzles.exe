@@ -5,8 +5,14 @@ from employee.models import RequestTable
 from helpdesk.models import hardware_details
 
 def dashboard(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    
     try:
-        object = hardware_details.objects.first()
+        object = hardware_details.objects.filter(emp_ip_address = ip)
         return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
     except:
         return render(request, "employee/dashboard.html")
