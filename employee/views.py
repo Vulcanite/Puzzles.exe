@@ -1,4 +1,3 @@
-from webbrowser import get
 from django.shortcuts import render
 
 from employee.models import RequestTable
@@ -12,7 +11,8 @@ def dashboard(request):
         ip = request.META.get('REMOTE_ADDR')
     try:
         object = hardware_details.objects.get(emp_ip_address = ip)
-        print(ip)
+        if object.emp_name == None:
+            object.emp_name = request.user.username
         return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
     except:
         return render(request, "employee/dashboard.html")

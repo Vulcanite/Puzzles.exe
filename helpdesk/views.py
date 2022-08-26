@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from deepdiff import DeepDiff
 from employee.models import RequestTable
+from helpdesk.models import hardware_details
 
 status_colors = {"OPENED": "primary", "APPROVED":"", "REJECTED":"danger"}
 
@@ -13,6 +14,7 @@ def dashboard(request):
     return render(request, "helpdesk/dashboard.html", {"open_requests":open_requests, "approved_requests":approved_requests})
 
 def memberPage(request):
+    object = hardware_details.objects.get(emp_ip_address = ip)
     return render(request, "helpdesk/member.html")
 
 def deleteUser(request):
