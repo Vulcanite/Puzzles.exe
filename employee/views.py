@@ -5,8 +5,11 @@ from employee.models import RequestTable
 from helpdesk.models import hardware_details
 
 def dashboard(request):
-    object = hardware_details.objects.first()
-    return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
+    try:
+        object = hardware_details.objects.first()
+        return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
+    except:
+        return render(request, "employee/dashboard.html")
 
 def supportRequest(request):
     return render(request, "employee/support-form.html")
