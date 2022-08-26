@@ -30,7 +30,7 @@
               src="{% static 'images/pc-image.png' %}"
               style="width: 50%"
             />
-            <h3>{{details.PrivateIPAddress}}</h3>
+            <h3>{{details.IPAddress}}</h3>
             <span class="logged-in" style="color: green">● ACTIVE</span><br />
             <span class="logged-out" style="color: red; visibility: hidden">● OFFLINE</span>
             <br>
@@ -55,7 +55,7 @@
                   </tr>
                   <tr>
                     <th scope="row" style="text-align: left;">HDD</th>
-                    <td style="text-align: left;">{{details.HDD.Model}}</td>
+                    <td style="text-align: left;">{{details.HDD.0.Model}}</td>
                   </tr>
                   <tr>
                     <th scope="row" style="text-align: left;">GPU</th>

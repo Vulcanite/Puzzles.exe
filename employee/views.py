@@ -10,9 +10,9 @@ def dashboard(request):
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
-    
     try:
-        object = hardware_details.objects.filter(emp_ip_address = ip)
+        object = hardware_details.objects.get(emp_ip_address = ip)
+        print(ip)
         return render(request, "employee/dashboard.html", {"details" : object.emp_pc_config})
     except:
         return render(request, "employee/dashboard.html")
