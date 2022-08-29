@@ -94,14 +94,27 @@
                             <td style="text-align: left;">{{details.HDD.0.Model}}</td>
                         </tr>
                         <tr>
-                            <th scope="row" style="text-align: left;">HDD momery</th>
-                            <td style="text-align: left;">{{details.HDD.Memory}}</td>
+                            <th scope="row" style="text-align: left;">HDD Memory</th>
+                            <td style="text-align: left;">{{details.HDD.0.Memory}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" style="text-align: left;">SSD model</th>
+                            <td style="text-align: left;">{{details.SSD.0.Model}}</td>
                         </tr>
                         <tr>
-                            <th scope="row" style="text-align: left;">MotherBoard</th>
-                            <td style="text-align: left;">{{details.MotherBoard.Manufacturer}}</td>
+                            <th scope="row" style="text-align: left;">SSD Memory</th>
+                            <td style="text-align: left;">{{details.SSD.0.Memory}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="text-align: left;">Motherboard</th>
+                            <td style="text-align: left;">{{details.Motherboard.Manufacturer}}</td>
                         </tr>
                         {% for i in details.GPU %}
+                        <tr>
+                            <th scope="row" style="text-align: left;">Motherboard Product ID</th>
+                            <td style="text-align: left;">{{details.Motherboard.Product}}</td>
+                        </tr>
                         <tr>
                             <th scope="row" style="text-align: left;">GPU Model</th>
                             <td style="text-align: left;">{{i.Model}}</td>
