@@ -34,7 +34,6 @@
             <span class="logged-in" style="color: green">● ACTIVE</span><br />
             <span class="logged-out" style="color: red; visibility: hidden">● OFFLINE</span>
             <br>
-            <button type="button" class="btn btn-primary"> Refresh </button>
           </div>
           <div class="col-md-6">
             <div class="text-dark h5 mb-0">
@@ -42,29 +41,87 @@
                 <br/><br/>
                 <tbody>
                   <tr>
-                    <th class="bold" scope="row" style="text-align: left;">Device Type</th>
-                    <td style="text-align: left;">{{details.DeviceType}}</td>
+                      <th class="bold" scope="row" style="text-align: left;">Device Type</th>
+                      <td style="text-align: left;">{{details.DeviceType}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" style="text-align: left;">CPU</th>
-                    <td style="text-align: left;">{{details.CPU.Name}}</td>
+                      <th scope="row" style="text-align: left;">CPU</th>
+                      <td style="text-align: left;">{{details.CPU.Name}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" style="text-align: left;">RAM</th>
-                    <td style="text-align: left;">{{details.RAM.0.Manufacturer}}</td>
+                      <th scope="row" style="text-align: left;">CPU</th>
+                      <td style="text-align: left;">{{details.CPU.ClockSpeed}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" style="text-align: left;">HDD</th>
-                    <td style="text-align: left;">{{details.HDD.0.Model}}</td>
+                      <th scope="row" style="text-align: left;">CPU</th>
+                      <td style="text-align: left;">{{details.CPU.Manufacturer}}</td>
+                  </tr>
+                  {% for i in details.Mouse %}
+                  <tr>
+                      <th scope="row" style="text-align: left;">Mouse</th>
+                      <td style="text-align: left;">{{i.PNPDeviceID}}</td>
+                  </tr>
+                  {% endfor %}
+                  {% for i in details.RAM %}
+                  <tr>
+                      <th scope="row" style="text-align: left;">RAM Manufacturer</th>
+                      <td style="text-align: left;">{{i.Manufacturer}}</td>
                   </tr>
                   <tr>
-                    <th scope="row" style="text-align: left;">GPU</th>
-                    <td style="text-align: left;">{{details.GPU.0.Vendor}}</td>
+                      <th scope="row" style="text-align: left;">RAM Type</th>
+                      <td style="text-align: left;">{{i.Type}}</td>
                   </tr>
-                </tbody>
+                  {% endfor %}
+                  <tr>
+                      <th scope="row" style="text-align: left;">HDD model</th>
+                      <td style="text-align: left;">{{details.HDD.0.Model}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">HDD Memory</th>
+                      <td style="text-align: left;">{{details.HDD.0.Memory}}</td>
+                  </tr>
+
+                  <tr>
+                      <th scope="row" style="text-align: left;">SSD model</th>
+                      <td style="text-align: left;">{{details.SSD.0.Model}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">SSD Memory</th>
+                      <td style="text-align: left;">{{details.SSD.0.Memory}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">Motherboard</th>
+                      <td style="text-align: left;">{{details.Motherboard.Manufacturer}}</td>
+                  </tr>
+                  {% for i in details.GPU %}
+                  <tr>
+                      <th scope="row" style="text-align: left;">Motherboard Product ID</th>
+                      <td style="text-align: left;">{{details.Motherboard.Product}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">GPU Model</th>
+                      <td style="text-align: left;">{{i.Model}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">GPU Vendor</th>
+                      <td style="text-align: left;">{{i.Vendor}}</td>
+                  </tr>
+                  {% endfor %}
+                  <tr>
+                      <th scope="row" style="text-align: left;">Keyboard</th>
+                      <td style="text-align: left;">{{details.Keyboard.PNPDeviceID}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">Camera Name</th>
+                      <td style="text-align: left;">{{details.Camera.Name}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row" style="text-align: left;">Camera Id</th>
+                      <td style="text-align: left;">{{details.Camera.Id}}</td>
+                  </tr>
+                  </tbody>
               </table>
             </div>
-            <button type="button" class="btn btn-primary" onclick="javascript:$('#currentConfig').modal('show');">More details</button>
           </div>
         </div>
       </div>
