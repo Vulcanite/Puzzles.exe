@@ -1,6 +1,6 @@
 import datetime as dt
 from django.db import models
-from UserAuth.models import customuser
+from user_auth.models import customuser
 
 # Create your models here.
 TAGS = (
