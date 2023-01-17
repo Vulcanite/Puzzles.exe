@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('helpdesk/', include('helpdesk.urls')),
     path('emp/', include('employee.urls')),
-    path('auth/', include('UserAuth.urls')),
+    path('auth/', include('user_auth.urls')),
     path("api/", include("helpdesk.api.urls")),
     path("", lambda request: redirect('auth/login/', permanent=False))
 ]

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'employee',
     'helpdesk',
-    'UserAuth',
+    'user_auth',
     'rest_framework',
 ]
 
@@ -54,7 +54,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'SIH.urls'
 
-AUTH_USER_MODEL = 'UserAuth.CustomUser'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 TEMPLATES = [
     {
